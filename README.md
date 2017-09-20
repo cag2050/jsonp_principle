@@ -5,6 +5,25 @@
 4. 最后将 json 数据直接以入参的方式，放置到 function 中，这样就生成了一段 js 语法的文档，返回给客户端。 
 5. 客户端浏览器，解析script标签，并执行返回的 javascript 文档，此时数据作为参数，传入到了客户端预先定义好的 callback 函数里.
 
+* jsonp 原理，代码示意：  
+本地定义的函数===
+```
+<script>
+    function local_func(data) {
+        // 函数内容
+    }
+</script>
+```
+返回的数据放在srcipt标签里===
+```
+<script src="http://api.douban.com/v2/movie/in_theaters?callback=local_func"></script>
+同价于：
+<script>
+    ;local_func([返回的数据])
+</script>
+
+```
+
 * 2种方式：
 1. jsonp 在原生js中的实现:  
 通过src="http://api.douban.com/v2/movie/in_theaters?callback=local_func"。   
