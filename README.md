@@ -8,9 +8,9 @@
 * 2种方式：
 1. jsonp 在原生js中的实现:  
 通过src="http://api.douban.com/v2/movie/in_theaters?callback=local_func"。   
-直接输入访问：http://api.douban.com/v2/movie/in_theaters，返回的数据是一个对象：{xxx}。  
-直接输入访问：http://api.douban.com/v2/movie/in_theaters?callback=?，返回的数据是一个对象：{xxx}。  
-直接输入访问：http://api.douban.com/v2/movie/in_theaters?callback=local_func，返回的数据是：;local_func({xxx})。  
+直接输入访问：http://api.douban.com/v2/movie/in_theaters ，返回的数据是一个对象：{xxx}。  
+直接输入访问：http://api.douban.com/v2/movie/in_theaters?callback=? ，返回的数据是一个对象：{xxx}。  
+直接输入访问：http://api.douban.com/v2/movie/in_theaters?callback=local_func ，返回的数据是：;local_func({xxx})。  
 注意点：  
 callback指定的回调函数，是客户端注册的，必须是定义在window下的全局函数。  
 例子网址：http://htmlpreview.github.io/?https://github.com/cag2050/jsonp_principle/blob/master/src/jsonp_js.html  
