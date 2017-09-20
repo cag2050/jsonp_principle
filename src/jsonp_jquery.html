@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+jsonp 在jquery中的实现（在console查看打印结果）
+<script>
+    (function () {
+        // 客户端注册的回调函数，必须是定义在window下的全局函数
+        window.local_func = function (data) {
+            console.log("local_func函数执行 开始-----");
+            console.log("从接口返回的数据：");
+            console.log(data.title + ":1." + data.subjects[0].title);
+            console.log("local_func函数执行 结束-----");
+        };
+        var jsonpDemo = {
+            init: function () {
+                this.getData();
+            },
+            getData: function () {
+                var url = "http://api.douban.com/v2/movie/in_theaters"; // 豆瓣：正在热映的电影，接口地址
+                // ajax发到服务器的数据data，可以是对象、字符串。以下分别写了，用其一
+                var data_obj = {
+                    city: "济南"
+                };
+                var data_str = "city=济南";
+                $.ajax({
+                    type: "post", // 请求方式 ("POST" 或 "GET")， 默认为 "GET"。
+                    url: url, // 发送请求的地址,默认: 当前页地址。
+                    async: true, // (默认: true) 默认设置下，所有请求均为异步请求。
+                    data: data_str, // 发送到服务器的数据。可以是对象、字符串。
+//                    data: data_obj, // 发送到服务器的数据。可以是对象、字符串。
+                    dataType: "jsonp", // 预期服务器返回的数据类型。使用 JSONP 形式调用函数时，如 "myurl?callback=?" jQuery 将自动替换 ? 为正确的函数名，以执行回调函数。
+                    jsonp: "callback", //重写回调函数的名字。这个值用来替代在 "callback=?" 这种 GET 或 POST 请求中 URL 参数里的 "callback" 部分，比如 {jsonp:'onJsonPLoad'} 会导致将 "onJsonPLoad=?" 传给服务器。
+                    jsonpCallback: "local_func", //指定一个回调函数名。这个值将用来取代 jQuery返回的、自动生成的随机函数名。回调成功后，首先查找运行此处注册的函数(若没有，则继续执行success函数；不论有没有，都会执行success函数）
+                    success: function (data) {
+                        console.log("success函数执行 开始-----");
+                        console.log("从接口返回的数据：");
+                        console.log(data.title + ":1." + data.subjects[0].title);
+                        console.log("success函数执行 结束-----");
+                    }
+                })
+            }
+        };
+        jsonpDemo.init();
+    })();
+</script>
+</body>
+</html>
