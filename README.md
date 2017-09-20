@@ -17,7 +17,7 @@
 返回的数据放在srcipt标签里===
 ```
 <script src="http://api.douban.com/v2/movie/in_theaters?callback=local_func"></script>
-同价于：
+等价于：
 <script>
     ;local_func([返回的数据])
 </script>
