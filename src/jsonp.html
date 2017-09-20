@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+在console查看打印结果
+<script>
+    function local_func(data) {
+        console.log("local_func函数执行 开始-----");
+        console.log("从接口返回的数据：");
+        console.log(data.title + ":1." + data.subjects[0].title);
+        console.log("local_func函数执行 结束-----");
+    }
+</script>
+<!-- 豆瓣：正在热映的电影，接口地址：https://developers.douban.com/wiki/?title=movie_v2#in_theaters -->
+<!--callback指定的回调函数，是客户端注册的，必须是定义在window下的全局函数。-->
+<!--在console查看打印结果-->
+<script src="http://api.douban.com/v2/movie/in_theaters?callback=local_func"></script>
+</body>
+</html>
